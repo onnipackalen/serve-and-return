@@ -1,0 +1,58 @@
+{
+  "mode": "event_w",
+  "args": [
+    "0",
+    "0.5",
+    "1",
+    "2",
+    "4"
+  ],
+  "shipped": {
+    "surface": true,
+    "stages": false,
+    "event_w": 2.0,
+    "carry": true
+  },
+  "results": [
+    {
+      "config": "in-event w=0",
+      "scale": 0.7,
+      "test_log_loss": 0.6192707256141323,
+      "vs_first": -0.0,
+      "paired_t": 0.0,
+      "n_test": 22736
+    },
+    {
+      "config": "in-event w=0.5",
+      "scale": 0.7,
+      "test_log_loss": 0.6187903502167893,
+      "vs_first": -0.0004803753973429702,
+      "paired_t": 7.034773414975559,
+      "n_test": 22736
+    },
+    {
+      "config": "in-event w=1",
+      "scale": 0.6,
+      "test_log_loss": 0.6185169513985166,
+      "vs_first": -0.0007537742156156463,
+      "paired_t": 5.301732696778643,
+      "n_test": 22736
+    },
+    {
+      "config": "in-event w=2",
+      "scale": 0.6,
+      "test_log_loss": 0.6179739263569713,
+      "vs_first": -0.0012967992571609262,
+      "paired_t": 4.9086837702240365,
+      "n_test": 22736
+    },
+    {
+      "config": "in-event w=4",
+      "scale": 0.5,
+      "test_log_loss": 0.6183429496033164,
+      "vs_first": -0.0009277760108159319,
+      "paired_t": 1.6968786219407845,
+      "n_test": 22736
+    }
+  ]
+}

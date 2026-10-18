@@ -1,0 +1,376 @@
+/* A scorer's card, not a dashboard.
+ *
+ * The reference is the thing an umpire fills in: ruled paper, ink, hairlines,
+ * two players on facing sides of a spine, and numbers set large enough to
+ * read from across a table. Colour is almost absent -- one saturated mark for
+ * the thing that is live, and grey for everything that is context. No card
+ * has a shadow; nothing is rounded except the two controls you actually press.
+ */
+
+:root{
+  --paper:#F7F8F6;      /* cool paper, not cream */
+  --card:#FFFFFF;
+  --ink:#14181A;        /* near-black with a green cast */
+  --body:#33403F;
+  --mute:#6B7875;
+  --faint:#98A5A1;
+  --rule:#D3DAD6;       /* hairline */
+  --rule-soft:#E6EAE7;
+  --mark:#C2410C;       /* one saturated mark: a line call */
+  --mark-soft:#FBEDE6;
+  --ok:#1F6F4A;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: "Helvetica Neue", Helvetica, "Segoe UI", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#101413; --card:#171C1B; --ink:#EDF1EE; --body:#C2CCC8;
+    --mute:#8B9793; --faint:#5E6A66;
+    --rule:#2A3231; --rule-soft:#1E2524;
+    --mark:#F97316; --mark-soft:#2A1B12; --ok:#4FAE7F;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#101413; --card:#171C1B; --ink:#EDF1EE; --body:#C2CCC8;
+  --mute:#8B9793; --faint:#5E6A66;
+  --rule:#2A3231; --rule-soft:#1E2524;
+  --mark:#F97316; --mark-soft:#2A1B12; --ok:#4FAE7F;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{
+  background:var(--paper); color:var(--body);
+  font:400 14px/1.55 var(--sans);
+  display:flex; flex-direction:column;
+  -webkit-font-smoothing:antialiased;
+  font-variant-numeric:tabular-nums;
+}
+
+/* ------------------------------------------------------------- masthead */
+header{
+  display:flex; align-items:baseline; gap:18px; flex-wrap:wrap;
+  padding:14px 22px 12px; border-bottom:2px solid var(--ink);
+  background:var(--card);
+}
+header h1{
+  font:600 15px/1 var(--serif); margin:0; color:var(--ink);
+  letter-spacing:.02em;
+}
+header h1 em{font-style:italic; color:var(--mark)}
+.meta{font:400 12px/1.4 var(--mono); color:var(--mute)}
+.meta b{color:var(--ink); font-weight:600}
+.meta .warn{color:var(--mark)}
+
+main{flex:1; display:flex; min-height:0}
+
+/* --------------------------------------------------------------- index */
+#roster{
+  width:288px; flex:none; border-right:1px solid var(--rule);
+  display:flex; flex-direction:column; min-height:0; background:var(--card);
+}
+.controls{padding:12px 14px 10px; display:flex; flex-direction:column; gap:8px}
+.controls .row{display:flex; gap:6px}
+input,select,button{font:inherit; color:var(--ink)}
+input[type=search],input[type=text],input[type=number],input:not([type]),select{
+  background:transparent; border:none; border-bottom:1px solid var(--rule);
+  padding:5px 2px; width:100%; border-radius:0; font-size:13px;
+}
+input[type=search]{font:400 14px/1.4 var(--serif)}
+select{font:400 12px/1.4 var(--mono); color:var(--mute); cursor:pointer}
+input:focus,select:focus{outline:none; border-bottom:1px solid var(--mark)}
+.count{padding:2px 14px 8px; font:400 11px var(--mono); color:var(--faint)}
+
+#roster-list{list-style:none; margin:0; padding:0 0 24px; overflow-y:auto; flex:1}
+#roster-list li{
+  display:grid; grid-template-columns:24px 1fr auto; gap:10px;
+  align-items:baseline; padding:6px 14px; cursor:pointer;
+  border-bottom:1px solid var(--rule-soft);
+}
+#roster-list li:hover{background:var(--mark-soft)}
+#roster-list li.sel-a,#roster-list li.sel-b{background:var(--mark-soft)}
+#roster-list li.sel-a .nm,#roster-list li.sel-b .nm{color:var(--mark); font-weight:600}
+#roster-list .rk{font:400 11px var(--mono); color:var(--faint); text-align:right}
+#roster-list .nm{font-family:var(--serif); font-size:14px; color:var(--ink);
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+#roster-list .val{font:400 12px var(--mono); color:var(--mute)}
+#roster-list .why{font:400 10px var(--sans); color:var(--faint); font-style:italic}
+
+/* --------------------------------------------------------------- stage */
+#stage{flex:1; display:flex; flex-direction:column; min-width:0; min-height:0}
+
+/* the scoreboard: two facing sides of a ruled spine */
+#slots{
+  display:grid; grid-template-columns:1fr auto 1fr; align-items:stretch;
+  border-bottom:1px solid var(--rule); background:var(--card);
+}
+.slot{
+  background:none; border:none; cursor:pointer; text-align:left;
+  padding:16px 22px 14px; min-width:0; display:flex; flex-direction:column;
+  gap:3px; border-radius:0;
+}
+.slot[data-slot="b"]{text-align:right; align-items:flex-end}
+.slot .tag{font:400 10px/1 var(--mono); color:var(--faint); letter-spacing:.1em}
+.slot .who{
+  font:400 22px/1.15 var(--serif); color:var(--ink);
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:100%;
+}
+.slot:not(.filled) .who{color:var(--faint); font-style:italic; font-size:17px}
+.slot:hover .who{color:var(--mark)}
+.vs{
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:5px; padding:0 14px; border-left:1px solid var(--rule);
+  border-right:1px solid var(--rule); color:var(--faint);
+  font:400 11px var(--mono);
+}
+.vs button{
+  background:none; border:none; cursor:pointer; color:var(--faint);
+  font-size:13px; line-height:1; padding:2px 4px;
+}
+.vs button:hover{color:var(--mark)}
+
+#conditions{
+  /* flex-direction is set explicitly: this element also carries .controls,
+     which stacks in a column, and inheriting that put every control in a
+     right-aligned vertical stack. */
+  display:flex; flex-flow:row wrap; align-items:end; gap:16px;
+  padding:10px 22px; border-bottom:1px solid var(--rule);
+}
+#conditions label{
+  font:400 10px/1.3 var(--mono); color:var(--faint); letter-spacing:.06em;
+  display:flex; flex-direction:column; gap:1px;
+}
+#conditions label.check{flex-direction:row; align-items:center; gap:6px;
+  padding-bottom:5px; font-size:11px; color:var(--mute)}
+#conditions select,#conditions input:not([type=checkbox]){min-width:112px}
+#conditions input#at{min-width:170px}
+
+#tabs{display:flex; gap:0; padding:0 22px; border-bottom:1px solid var(--rule)}
+#tabs button{
+  background:none; border:none; border-bottom:2px solid transparent;
+  padding:9px 0; margin-right:22px; cursor:pointer; color:var(--mute);
+  font:400 13px var(--serif);
+}
+#tabs button:hover{color:var(--ink)}
+#tabs button.on{color:var(--ink); border-bottom-color:var(--mark)}
+
+#panels{flex:1; overflow-y:auto; min-height:0}
+.panel{display:none; padding:20px 22px 64px; max-width:1080px}
+.panel.on{display:block}
+.empty{color:var(--faint); padding:44px 0; font:italic 15px var(--serif)}
+
+/* ------------------------------------------------------------- the call */
+.call{
+  display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
+  border-top:2px solid var(--ink); border-bottom:1px solid var(--rule);
+  padding:14px 0 16px; margin-bottom:4px;
+}
+.call .side{display:flex; flex-direction:column; gap:2px}
+.call .side.b{text-align:right; align-items:flex-end}
+.call .nm{font:400 15px var(--serif); color:var(--mute)}
+.call .p{font:600 44px/1 var(--sans); color:var(--ink); letter-spacing:-.02em}
+.call .side.fav .p{color:var(--mark)}
+.call .fair{font:400 12px var(--mono); color:var(--mute)}
+.call .mid{padding:0 20px; text-align:center; color:var(--faint);
+  font:400 10px var(--mono); letter-spacing:.12em}
+
+.bar{display:flex; height:3px; margin:0 0 18px; background:var(--rule-soft)}
+.bar i{display:block; height:100%}
+.bar .ba{background:var(--mark)} .bar .bb{background:var(--rule)}
+
+.bits{
+  display:grid; grid-template-columns:1fr 1fr; gap:0 28px;
+  font:400 12px/1.9 var(--mono); color:var(--mute); margin-bottom:4px;
+}
+.bits .b{text-align:right}
+.bits div{white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+
+h3{
+  font:400 12px/1 var(--mono); color:var(--faint); letter-spacing:.08em;
+  margin:26px 0 8px; padding-bottom:5px; border-bottom:1px solid var(--rule);
+}
+h2{font:400 24px/1.2 var(--serif); color:var(--ink); margin:0}
+
+/* -------------------------------------------------------------- tables */
+.tw{overflow-x:auto; margin:0 0 4px}
+table{border-collapse:collapse; width:100%; font:400 12.5px/1.5 var(--mono)}
+th{
+  text-align:right; font-weight:400; color:var(--faint); padding:0 12px 5px 0;
+  border-bottom:1px solid var(--rule); font-size:10.5px; letter-spacing:.06em;
+  white-space:nowrap;
+}
+th:first-child,td:first-child{text-align:left; padding-left:0}
+td{text-align:right; padding:5px 12px 5px 0;
+   border-bottom:1px solid var(--rule-soft); color:var(--body)}
+td:first-child{color:var(--ink)}
+tr:last-child td{border-bottom:none}
+td.win{color:var(--ok)} td.loss{color:var(--mute)}
+td.note,th.note{
+  text-align:left; font:400 12.5px/1.5 var(--sans); color:var(--mute);
+  white-space:normal; min-width:180px;
+}
+table.kv td:first-child{color:var(--mute); width:210px; white-space:nowrap}
+table.kv td.num{text-align:right; width:128px; white-space:nowrap; color:var(--ink)}
+table.data tr:hover td{background:var(--mark-soft)}
+
+/* ------------------------------------------------------------ notices */
+.flag{
+  border-left:2px solid var(--mark); background:var(--mark-soft);
+  padding:8px 13px; margin:12px 0; font:400 13px/1.5 var(--sans);
+  color:var(--body); max-width:74ch;
+}
+.flag b{color:var(--ink)}
+.flag.quiet{border-left-color:var(--rule); background:none; color:var(--mute);
+  padding-left:11px}
+
+/* stat rows, not a grid of cards */
+.rows{border-top:1px solid var(--rule); margin:0 0 4px}
+.rows .r{
+  display:grid; grid-template-columns:158px 118px 1fr; gap:16px;
+  align-items:baseline; padding:8px 0; border-bottom:1px solid var(--rule-soft);
+}
+.rows .k{font:400 11px var(--mono); color:var(--faint); letter-spacing:.05em}
+.rows .v{font:600 19px/1 var(--sans); color:var(--ink)}
+.rows .v.mark{color:var(--mark)}
+.rows .s{font:400 12.5px/1.45 var(--sans); color:var(--mute)}
+
+.band{font:600 12px var(--mono); letter-spacing:.06em}
+.band.HIGH{color:var(--ok)} .band.GOOD{color:var(--ink)}
+.band.FAIR{color:var(--mark)} .band.LOW{color:var(--mark)}
+
+details.raw{margin-top:26px}
+details.raw summary{
+  cursor:pointer; color:var(--faint); font:400 11px var(--mono);
+  letter-spacing:.06em; list-style:none;
+}
+details.raw summary::marker{content:""}
+details.raw summary:before{content:"+ "; color:var(--mark)}
+details.raw[open] summary:before{content:"\2212 "}
+details.raw summary:hover{color:var(--mute)}
+details.raw pre{
+  background:var(--card); border:1px solid var(--rule); padding:14px 16px;
+  overflow-x:auto; font:400 11.5px/1.55 var(--mono); color:var(--mute);
+  margin-top:8px;
+}
+
+/* ------------------------------------------------------------- totals */
+.hist{display:flex; align-items:flex-end; gap:1px; height:112px; margin:4px 0 2px}
+.hist .col{flex:1; background:var(--rule); min-height:1px}
+.hist .col.mid{background:var(--mark)}
+.axis{display:flex; gap:1px; font:400 9px var(--mono); color:var(--faint)}
+.axis span{flex:1; text-align:center}
+
+/* -------------------------------------------------------------- player */
+.who-hd{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;
+  padding-bottom:10px; border-bottom:2px solid var(--ink); margin-bottom:4px}
+.who-hd .rk{font:400 12px var(--mono); color:var(--mute)}
+.who-hd button{
+  background:none; border:1px solid var(--rule); padding:3px 9px;
+  cursor:pointer; font:400 11px var(--mono); color:var(--mute);
+}
+.who-hd button:hover{border-color:var(--mark); color:var(--mark)}
+.spinner{color:var(--faint); font:italic 14px var(--serif); padding:22px 0}
+
+/* --------------------------------------------------------------- news */
+.newsbox{border:1px solid var(--rule); background:var(--card); padding:14px 16px;
+  margin:14px 0; max-width:74ch}
+.newsbox h4{font:400 12px var(--mono); color:var(--faint); letter-spacing:.07em;
+  margin:0 0 8px}
+.newsbox textarea{
+  width:100%; min-height:120px; background:var(--paper); color:var(--ink);
+  border:1px solid var(--rule); padding:9px 11px;
+  font:400 11.5px/1.5 var(--mono); resize:vertical;
+}
+.newsbox .act{display:flex; gap:10px; align-items:center; margin-top:9px}
+.newsbox button{
+  background:var(--ink); color:var(--paper); border:none; padding:6px 14px;
+  cursor:pointer; font:400 12px var(--sans); border-radius:2px;
+}
+.newsbox button.ghost{background:none; color:var(--mute);
+  border:1px solid var(--rule)}
+.newsbox button:hover{background:var(--mark); color:#fff}
+.newsbox button.ghost:hover{background:none; border-color:var(--mark); color:var(--mark)}
+.newsbox .msg{font:400 12px var(--mono); color:var(--mute)}
+.newsbox .msg.bad{color:var(--mark)}
+.newsbox pre{
+  background:var(--paper); border:1px solid var(--rule); padding:10px 12px;
+  font:400 11px/1.5 var(--mono); color:var(--mute); max-height:190px;
+  overflow:auto; margin:0 0 9px; white-space:pre-wrap;
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ------------------------------------------------- easy to use (2026-09-12) */
+header .help{font:italic 12px/1.4 var(--serif); color:var(--mute); margin-left:auto}
+kbd{
+  font:400 10px/1 var(--mono); color:var(--ink); border:1px solid var(--rule);
+  border-bottom-width:2px; border-radius:3px; padding:2px 5px; background:var(--card);
+}
+#roster-list li.hi{background:var(--mark-soft); box-shadow:inset 2px 0 0 var(--mark)}
+.slot.next .tag:after{content:"  \00B7  next"; color:var(--mark); letter-spacing:.04em}
+.slot:not(.filled).next .who{color:var(--mute)}
+#conditions .grp{
+  display:flex; flex-flow:row wrap; align-items:end; gap:14px;
+  padding-right:16px; border-right:1px solid var(--rule-soft);
+}
+#conditions .grp:last-of-type{border-right:none}
+#conditions input[type=number]{min-width:96px; font:400 12px/1.4 var(--mono)}
+.vnote{flex-basis:100%; font:italic 11px/1.4 var(--serif); color:var(--mute); min-height:0}
+.vnote:empty{display:none}
+
+.guide{max-width:62ch; padding:26px 0 10px}
+.guide ol{margin:0 0 18px; padding-left:22px; font:400 15px/1.7 var(--serif); color:var(--body)}
+.guide li{margin-bottom:10px}
+.guide li b{color:var(--ink)}
+.guide .small{font:400 12px/1.5 var(--sans); color:var(--mute)}
+button.primary{
+  background:var(--ink); color:var(--paper); border:none; padding:7px 15px;
+  cursor:pointer; font:400 13px var(--sans); border-radius:2px;
+}
+button.primary:hover{background:var(--mark); color:#fff}
+button.ghost{
+  background:none; border:1px solid var(--rule); padding:4px 10px; cursor:pointer;
+  font:400 11px var(--mono); color:var(--mute); border-radius:2px;
+}
+button.ghost:hover{border-color:var(--mark); color:var(--mark)}
+
+.verdict{
+  display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;
+  font:400 16px/1.5 var(--serif); color:var(--body); margin:8px 0 14px;
+}
+.verdict b{color:var(--ink)}
+.verdict .band{font-size:11px}
+.verdict .copy{margin-left:auto}
+.verdict .copied{font:400 11px var(--mono); color:var(--mute)}
+.market .v.agree{color:var(--ok)}
+
+.untuck{
+  display:none; margin:8px 14px 12px; background:none; border:1px solid var(--rule);
+  padding:7px 12px; cursor:pointer; font:400 12px var(--sans); color:var(--mute);
+}
+.untuck:hover{border-color:var(--mark); color:var(--mark)}
+
+/* a phone: the index sits above the match, and folds away once two players are picked */
+@media (max-width:760px){
+  header{padding:10px 14px 8px; gap:10px}
+  header .help{margin-left:0; flex-basis:100%}
+  main{flex-direction:column; overflow-y:auto}
+  #roster{width:auto; border-right:none; border-bottom:1px solid var(--rule); flex:none}
+  #roster-list{max-height:38vh; flex:none}
+  #roster.tucked #roster-list, #roster.tucked .controls, #roster.tucked .count{display:none}
+  #roster.tucked .untuck{display:block}
+  #stage{flex:none}
+  #panels{overflow:visible}
+  .slot{padding:12px 14px 10px}
+  .slot .who{font-size:18px}
+  #conditions{padding:8px 14px; gap:10px}
+  #conditions .grp{border-right:none; padding-right:0}
+  #tabs{padding:0 14px}
+  #tabs button{margin-right:16px}
+  .panel{padding:14px 14px 48px}
+  .call .p{font-size:34px}
+  .bits{grid-template-columns:1fr; font-size:11.5px}
+  .bits .b{text-align:left}
+  .rows .r{grid-template-columns:110px 90px 1fr; gap:10px}
+  table.kv td:first-child{width:auto; white-space:normal}
+}

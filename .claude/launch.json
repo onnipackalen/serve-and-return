@@ -1,0 +1,16 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "app",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "app.py",
+        "--no-open",
+        "--port",
+        "8765"
+      ],
+      "port": 8765
+    }
+  ]
+}

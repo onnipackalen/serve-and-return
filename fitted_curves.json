@@ -1,0 +1,199 @@
+{
+ "k": 1.0,
+ "_note": "Residual adjustments to a player's win probability, indexed by bucket. Fitted on walk-forward residuals (never on the data that fitted the ratings), shrunk toward zero by n/(n+400), and validated on rolling time folds with the adjustment applied ANTISYMMETRICALLY and in LOG-ODDS, which is how price.py applies them. Worth -0.00541 nats out of sample (2026-09-15, 7-day cadence, age-dependent prior, refreshed archive; -0.00738 with the flat own prior, -0.00807 at 21 days, -0.00999 at 91 -- each improvement to the rating layer leaves the curves less to correct) at the shipped magnitude (k=1), 4 folds of 4; k=1.25 is within 0.0003 of it and the scale chosen on each fold's train half scores worse, so the natural value stays. Cost of dropping: entry +0.00100, age +0.00091, event_gwp +0.00090, resid_prior +0.00088, matches_28d +0.00083, form_spw +0.00026, event_sets_lost +0.00022, home +0.00015 -- entry is now the largest and age has more than halved, which is the age-dependent prior doing what it was built to do. EIGHT curves since 2026-09-12: entry (how the player got into the draw: qualifiers beat their price, protected-ranking entrants miss it) adds -0.00058 on top of the seven and costs +0.00058 to drop; live prices take it from the --entry flag / the app control, or from the player's earlier rows at the event when the archive carries a code, else unknown and no adjustment (the reconstructed feed carries the code since 2026-09-14). Measured 2026-09-12 and REJECTED in company: resid_365 (the player's residual over the last 365 days only, -0.00131 alone, +0.00092 when added: a substitute for resid_prior) and resid_surface (the residual on this surface only, -0.00038 alone, +0.00119 when added). Refitted 2026-09-11 against residuals priced through the CLI's own path (price.serve_probs: surface with the recent-form carry-over, in-event update, air density, the qual/Challenger supplement, age multipliers (0.50, 0.85); three-stage serve OFF). SEVEN curves: the seventh, resid_prior, is the player's own mean walk-forward residual over their prior matches, shrunk by n/(n+40) -- does this player beat the point model -- split-half reliability 0.39 for players with 40+ rows; it adds -0.00166 on top of the other six and costs +0.00166 to drop; live prices read it from data/player_traits.json. Cost of dropping each from the set: age +0.00255, resid_prior +0.00166, matches_28d +0.00146, event_gwp +0.00092, form_spw +0.00074, home +0.00018, event_sets_lost +0.00016. Measured 2026-09-11 and REJECTED in company: rank_gap (+0.00077 when added), seeded (+0.00035), bo5_resid_prior (+0.00007), log_rank (-0.00012, not worth a stale live input), elo_vs_model and opp_lefty (hurt alone), bo_diff_prior (hurts alone); entry type ADDS -0.00047 but cannot be known live before a player's first match at an event, so it waits for a draw source. REJECTED, each because it makes the SET worse or adds nothing: event_matches (raw wins banked -- the signal is margin, not count), bp_form (break points saved: clutch is noise), event_opp_rank, career_matches, career_pts, home_km, rank_change, peak_gap. The last three are all the same trend signal `age` already carries.",
+ "shrink_k": 400.0,
+ "buckets": {
+  "matches_28d": [
+   0,
+   2,
+   4,
+   6,
+   9,
+   99
+  ],
+  "event_gwp": [
+   0.0,
+   0.45,
+   0.5,
+   0.53,
+   0.56,
+   0.6,
+   1.01
+  ],
+  "event_sets_lost": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   99
+  ],
+  "home": [
+   0,
+   1,
+   2
+  ],
+  "age": [
+   0,
+   21,
+   24,
+   27,
+   30,
+   33,
+   99
+  ],
+  "form_spw": [
+   -1,
+   -0.03,
+   -0.01,
+   0.01,
+   0.03,
+   0.06,
+   1
+  ],
+  "resid_prior": [
+   -1,
+   -0.04,
+   -0.015,
+   -0.005,
+   0.005,
+   0.015,
+   0.04,
+   1
+  ],
+  "entry": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7
+  ]
+ },
+ "curves": {
+  "matches_28d": {
+   "0": -0.01915,
+   "1": -0.004474,
+   "2": 0.019869,
+   "3": 0.010827,
+   "4": 0.009606
+  },
+  "event_gwp": {
+   "0": -0.108238,
+   "1": -0.026946,
+   "2": -0.009032,
+   "3": 0.008831,
+   "4": 0.013023,
+   "5": 0.007113
+  },
+  "event_sets_lost": {
+   "0": 0.001625,
+   "1": 0.004574,
+   "2": -0.004942,
+   "3": -0.031574,
+   "4": -0.059487
+  },
+  "home": {
+   "0": -0.002668,
+   "1": 0.017712
+  },
+  "age": {
+   "0": 0.036497,
+   "1": 0.018604,
+   "2": 0.004886,
+   "3": -0.008752,
+   "4": -0.015589,
+   "5": -0.019091
+  },
+  "form_spw": {
+   "0": -0.016405,
+   "1": 0.001257,
+   "2": 0.00721,
+   "3": 0.008977,
+   "4": 0.01776,
+   "5": 0.020219
+  },
+  "resid_prior": {
+   "0": -0.028104,
+   "1": -0.013782,
+   "2": -0.026691,
+   "3": 0.004189,
+   "4": -0.010293,
+   "5": 0.005885,
+   "6": 0.024051
+  },
+  "entry": {
+   "0": -0.004748,
+   "1": 0.036219,
+   "2": 0.005012,
+   "3": -0.009126,
+   "4": 0.005506,
+   "5": -0.00117,
+   "6": -0.004801
+  }
+ },
+ "n": {
+  "matches_28d": {
+   "0": 16330,
+   "1": 16241,
+   "2": 13074,
+   "3": 8786,
+   "4": 2479
+  },
+  "event_gwp": {
+   "0": 403,
+   "1": 530,
+   "2": 2021,
+   "3": 4021,
+   "4": 7442,
+   "5": 13922
+  },
+  "event_sets_lost": {
+   "0": 41837,
+   "1": 10261,
+   "2": 3338,
+   "3": 902,
+   "4": 572
+  },
+  "home": {
+   "0": 47385,
+   "1": 6799
+  },
+  "age": {
+   "0": 3736,
+   "1": 9613,
+   "2": 13864,
+   "3": 14196,
+   "4": 8744,
+   "5": 6757
+  },
+  "form_spw": {
+   "0": 5234,
+   "1": 6473,
+   "2": 10096,
+   "3": 9638,
+   "4": 7197,
+   "5": 1793
+  },
+  "resid_prior": {
+   "0": 4036,
+   "1": 7918,
+   "2": 4683,
+   "3": 5294,
+   "4": 4845,
+   "5": 11740,
+   "6": 11168
+  },
+  "entry": {
+   "0": 46743,
+   "1": 5740,
+   "2": 2582,
+   "3": 1218,
+   "4": 369,
+   "5": 189,
+   "6": 69
+  }
+ }
+}

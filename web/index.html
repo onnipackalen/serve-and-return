@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Serve &amp; Return</title>
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎾</text></svg>">
+</head>
+<body>
+
+<header>
+  <h1>Serve <em>&</em> Return</h1>
+  <div id="meta" class="meta">loading…</div>
+  <div class="help">type a name, press <kbd>↵</kbd>, twice — the call appears</div>
+</header>
+
+<main>
+  <!-- ------------------------------------------------------ the roster -->
+  <aside id="roster">
+    <div class="controls">
+      <input id="q" type="search" placeholder="type a surname, ↵ picks it" autocomplete="off" autofocus>
+      <div class="row">
+        <select id="surface-filter" title="only players with a rating on this surface">
+          <option value="">any surface</option>
+          <option value="hard">hard</option>
+          <option value="clay">clay</option>
+          <option value="grass">grass</option>
+          <option value="carpet">carpet</option>
+        </select>
+        <select id="min-pts" title="recency-weighted service points behind the rating">
+          <option value="1500">1500+ pts</option>
+          <option value="500">500+ pts</option>
+          <option value="0">everyone</option>
+        </select>
+        <select id="sort">
+          <option value="p_vs_avg">by rating</option>
+          <option value="serve">by serve</option>
+          <option value="ret">by return</option>
+          <option value="pts">by data</option>
+          <option value="form_sd">by volatility</option>
+          <option value="name">by name</option>
+        </select>
+      </div>
+    </div>
+    <div id="roster-count" class="count"></div>
+    <ol id="roster-list"></ol>
+    <button id="untuck" class="untuck" hidden>change players</button>
+  </aside>
+
+  <!-- ------------------------------------------------------- the match -->
+  <section id="stage">
+
+    <div id="slots">
+      <button class="slot" id="slot-a" data-slot="a"><span class="tag">A</span><span class="who">nobody yet</span></button>
+      <div class="vs">
+        <button id="swap" title="swap sides">⇄</button>
+        <span>vs</span>
+        <button id="clear" title="clear both">✕</button>
+      </div>
+      <button class="slot" id="slot-b" data-slot="b"><span class="tag">B</span><span class="who">nobody yet</span></button>
+    </div>
+
+    <div id="conditions" class="controls">
+      <div class="grp">
+        <label>tournament
+          <input id="at" list="venues" placeholder="optional — sets surface and format" autocomplete="off">
+          <datalist id="venues"></datalist>
+        </label>
+        <label>surface
+          <select id="surface">
+            <option value="">all surfaces</option>
+            <option value="hard">hard</option>
+            <option value="clay">clay</option>
+            <option value="grass">grass</option>
+            <option value="carpet">carpet</option>
+          </select>
+        </label>
+        <label>format
+          <select id="best-of"><option value="3">best of 3</option><option value="5">best of 5</option></select>
+        </label>
+      </div>
+      <div class="grp">
+        <label>A entered as
+          <select id="entry-a" title="how A got into the draw — the results feed cannot say">
+            <option value="">unknown</option>
+            <option value="main">main draw</option>
+            <option value="Q">qualifier</option>
+            <option value="WC">wild card</option>
+            <option value="LL">lucky loser</option>
+            <option value="PR">protected ranking</option>
+            <option value="SE">special exempt</option>
+          </select>
+        </label>
+        <label>B entered as
+          <select id="entry-b" title="how B got into the draw — the results feed cannot say">
+            <option value="">unknown</option>
+            <option value="main">main draw</option>
+            <option value="Q">qualifier</option>
+            <option value="WC">wild card</option>
+            <option value="LL">lucky loser</option>
+            <option value="PR">protected ranking</option>
+            <option value="SE">special exempt</option>
+          </select>
+        </label>
+      </div>
+      <div class="grp">
+        <label>bookmaker odds A
+          <input id="odds-a" type="number" step="0.01" min="1.01" placeholder="e.g. 1.65" title="decimal odds — compared with the call, never used in it">
+        </label>
+        <label>bookmaker odds B
+          <input id="odds-b" type="number" step="0.01" min="1.01" placeholder="e.g. 2.30" title="decimal odds — compared with the call, never used in it">
+        </label>
+        <label class="check"><input id="curves" type="checkbox" checked> form/run curves</label>
+      </div>
+      <div id="venue-note" class="vnote"></div>
+    </div>
+
+    <nav id="tabs">
+      <button data-tab="price" class="on">the call</button>
+      <button data-tab="totals">games</button>
+      <button data-tab="player">the player</button>
+      <button data-tab="about">the model</button>
+    </nav>
+
+    <div id="panels">
+      <div class="panel on" id="tab-price"><div class="empty">loading…</div></div>
+      <div class="panel" id="tab-totals"><div class="empty">Two players, from the index on the left.</div></div>
+      <div class="panel" id="tab-player"><div class="empty">Pick a name on the left.</div></div>
+      <div class="panel" id="tab-about"><div class="empty">loading…</div></div>
+    </div>
+
+  </section>
+</main>
+
+<script src="/app.js"></script>
+</body>
+</html>

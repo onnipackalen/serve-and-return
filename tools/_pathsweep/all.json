@@ -1,0 +1,60 @@
+{
+  "mode": "all",
+  "args": [],
+  "shipped": {
+    "surface": true,
+    "stages": false,
+    "event_w": 2.0,
+    "carry": true
+  },
+  "results": [
+    {
+      "config": "shipped",
+      "scale": 0.7,
+      "test_log_loss": 0.6088451756584276,
+      "vs_first": -0.0,
+      "paired_t": 0.0,
+      "n_test": 22427
+    },
+    {
+      "config": "three-stage serve ON",
+      "scale": 0.3,
+      "test_log_loss": 0.6138989996218495,
+      "vs_first": 0.005053823963421887,
+      "paired_t": -8.536173982870649,
+      "n_test": 22427
+    },
+    {
+      "config": "in-event update OFF",
+      "scale": 0.7,
+      "test_log_loss": 0.6105460053819396,
+      "vs_first": 0.001700829723512055,
+      "paired_t": -5.597727407171083,
+      "n_test": 22427
+    },
+    {
+      "config": "both of those flipped",
+      "scale": 0.4,
+      "test_log_loss": 0.6150528585974767,
+      "vs_first": 0.006207682939049161,
+      "paired_t": -9.91855733150019,
+      "n_test": 22427
+    },
+    {
+      "config": "surface carry-over OFF",
+      "scale": 0.85,
+      "test_log_loss": 0.6267312515250322,
+      "vs_first": 0.017886075866604616,
+      "paired_t": -13.996721471186003,
+      "n_test": 22427
+    },
+    {
+      "config": "no surface split at all",
+      "scale": 0.6,
+      "test_log_loss": 0.6128440445730315,
+      "vs_first": 0.003998868914603913,
+      "paired_t": -4.751948787262191,
+      "n_test": 22427
+    }
+  ]
+}

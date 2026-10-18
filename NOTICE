@@ -1,0 +1,62 @@
+Data provenance
+===============
+
+The MIT licence in LICENSE covers the CODE in this repository. It does not
+cover tennis data, and no tennis data is distributed here. Every dataset the
+model reads is fetched by the user from its own source, under that source's
+own terms.
+
+This file exists so the position is explicit rather than implied.
+
+
+Sources the code reads
+----------------------
+
+Match results and serve statistics
+    Compiled by Jeff Sackmann (github.com/JeffSackmann), licensed
+    Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International.
+    NOT redistributed here. README.md explains how to obtain it.
+    NonCommercial applies to what you do with it; read the licence yourself
+    before using this code for anything beyond personal study.
+
+Recent results, newer than the archive snapshot
+    Scraped from tennisabstract.com by tools/ta/. No licence is granted for
+    that content and none of it is redistributed here — only the fetching and
+    parsing code. Respect the site; the fetcher is rate-limited for a reason.
+
+Historical weather
+    Open-Meteo (open-meteo.com), ERA5 reanalysis by Copernicus Climate Change
+    Service. Free, keyless. Cached locally by weather.py and not redistributed.
+
+Closing odds, used only to score the model against the market
+    tennis-data.co.uk. Workbooks are downloaded by the user and not
+    redistributed. tools/odds/ holds only the loader.
+
+
+Numbers that ARE in this repository
+-----------------------------------
+
+Four small files hold fitted model parameters:
+
+    fitted_params.json      scalar hyper-parameters (half-life, form scale,
+                            calibration slope, and similar)
+    fitted_curves.json      residual curves as bucket means plus row counts
+    tour_avg.json           tour-average serve rate by surface and era
+    confidence_model.json   measured log loss per confidence band
+
+These are aggregate measurements — scalars and bucket means. They contain no
+player, no match, and no row of the source data, and they cannot be used to
+reconstruct any of it. They are published on the view that an aggregate
+statistic is not an adaptation of the database it was measured from.
+
+If you take a stricter view of ShareAlike than that, delete those four files;
+`python3 tennis.py fit` and `python3 tools/curves.py write` regenerate them
+from data you fetched yourself.
+
+    matchgrid.npz
+    gamesgrid.json
+
+are tabulated output of the Barnett-Clarke recursion — the mathematics of
+tennis scoring, computed from the rules of the game. No match data is involved
+at any point. They are included because rebuilding them costs several minutes
+of CPU for a result that is identical for everyone.
