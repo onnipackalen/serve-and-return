@@ -1,0 +1,10 @@
+half_life=270  prior_weight=150  train_years=5
+tour  7s
+play  253s
+common 28,959  train 15,084 / test 13,875
+
+  tour-wide   param 0.035  cal 0.966  TEST ll 0.62230  brier 0.21724  acc 0.6425
+  per-player  param 0.850  cal 0.981  TEST ll 0.62726  brier 0.21934  acc 0.6379
+
+paired (tour - player): -0.00497 +/- 0.00158   t = -3.14
+  -> tour-wide better

@@ -1,0 +1,80 @@
+57,795 rated matches 2005-2026
+  tour-wide walk-forward       7s  28,959 matches
+  per-player walk-forward    340s  28,959 matches
+
+train 15,084 | test 13,875  (nothing below tuned on test)
+
+fit on TRAIN: tour-wide form_sd
+   sd 0.020   0.59356
+   sd 0.030   0.59216
+   sd 0.035   0.59184
+   sd 0.040   0.59185
+   sd 0.050   0.59282
+   -> 0.035
+
+fit on TRAIN: scale on each player's own derived form_sd
+   scale 0.50   0.58857
+   scale 0.70   0.58736
+   scale 0.85   0.58733
+   scale 1.00   0.58805
+   scale 1.20   0.58999
+   scale 1.50   0.59433
+   -> 0.85
+
+fit on TRAIN: weight on opponent-STYLE effect
+   style_w 0.00   0.58733
+   style_w 0.25   0.58737
+   style_w 0.50   0.58769
+   style_w 1.00   0.58890
+   style_w 1.50   0.59050
+   -> 0.00
+
+fit on TRAIN: weight on AIR DENSITY
+   dens_w 0.00   0.58733
+   dens_w 0.05   0.58732
+   dens_w 0.10   0.58732
+   dens_w 0.20   0.58731
+   dens_w 0.40   0.58730
+   -> 0.40
+
+fit on TRAIN: weight on HEAD-TO-HEAD effect
+   h2h_w 0.00   0.58730
+   h2h_w 0.25   0.58893
+   h2h_w 0.50   0.59246
+   h2h_w 1.00   0.59714
+   h2h_w 1.50   0.59961
+   -> 0.00
+
+calibration slope on TRAIN   tour 0.966   per-player 1.030
+   (<1 = was overconfident, shrink toward 0.5)
+
+==================================================================
+TEST  (13,875 matches)
+model                                     log loss    brier     acc
+
+fit on TRAIN: Elo K
+   K 2    0.62094
+   K 4    0.61471
+   K 8    0.64767
+   K 12   0.70375
+   K 24   0.93136
+   -> 4
+coin flip                                  0.69315  0.25000  0.0000
+Elo, K=4 (match results only)              0.65492  0.22997  0.6200
+tour-wide form_sd=0.035                    0.62273  0.21740  0.6425
+  + calibration                            0.62230  0.21724  0.6425
+per-player weights (scale 0.85)            0.61720  0.21500  0.6493
+  + opponent style (w=0.00)                0.61720  0.21500  0.6493
+  + air density (w=0.40)                   0.61715  0.21498  0.6492
+  + head-to-head (w=0.00)                  0.61715  0.21498  0.6492
+  + calibration                            0.61737  0.21506  0.6492
+
+calibration on TEST, final model
+  0.50-0.58  predicted 0.5416  realised 0.5353  gap +0.0063  (4,248)
+  0.58-0.67  predicted 0.6240  realised 0.5961  gap +0.0279  (3,716)
+  0.67-0.75  predicted 0.7058  realised 0.7019  gap +0.0039  (2,841)
+  0.75-0.83  predicted 0.7870  realised 0.7762  gap +0.0108  (1,743)
+  0.83-0.92  predicted 0.8695  realised 0.8596  gap +0.0099  (926)
+  0.92-1.00  predicted 0.9462  realised 0.9377  gap +0.0086  (401)
+
+wrote fitted_params.json  (test log loss 0.61737)

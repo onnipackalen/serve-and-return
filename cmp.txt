@@ -1,0 +1,10 @@
+  hl=730 pw=300 yrs=8  35,576 scorable (172s)
+  hl=270 pw=150 yrs=5  28,959 scorable (80s)
+
+common 28,959   train 15,084 / test 13,875
+
+  hl=730  pw=300  yrs=8  scale 0.85  TEST ll 0.62439  brier 0.21801  acc 0.6427
+  hl=270  pw=150  yrs=5  scale 1.00  TEST ll 0.62140  brier 0.21677  acc 0.6445
+
+paired difference (A - B) per match: +0.00298 +/- 0.00107 (SE)
+  t = +2.80   ->  B is significantly better

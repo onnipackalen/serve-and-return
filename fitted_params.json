@@ -14,6 +14,7 @@
   "trait_k_note": "TRAIT_K / TRAIT_MIN (40 / 15): the shrinkage n/(n+K) and the floor (fewer prior rows than MIN: no read) of resid_prior, the player's own mean walk-forward residual. Swept 2026-09-14 by tools/traitsweep.py on the residual cache (56,754 player-rows at the 7-day cadence; each value re-annotates the rows, refits the eight curves per fold and scores the shipped antisymmetric log-odds application at k=1; paired per-match t on 22,697 identical matches): K in 10..320 x MIN in 5..40 is FLAT -- the best cell, (40, 10), is -0.00007 at t +1.07, and MIN=40 costs +0.0002-0.0003 at t -1 to -1.5 for every K. (40, 15) stays. The last chosen constants of the correction layer are measured.",
   "prior_mode_note": "What the 270-day rating is shrunk toward by prior_weight (weights.PRIOR_MODE; TENNIS_PRIOR_MODE). 'tour' (the tour average) until 2026-09-14; 'own' since: the player's OWN long-window rating (the 12-year, 1,095-day-half-life fit that already exists for the surface carry-over), so a player back from a layoff is pulled toward who they were rather than toward the middle of the tour. Measured inside the shipped path by tools/knobsweep.py run prior_mode own, two walks at the 7-day cadence on the refreshed archive (43,075 identical matches, train 20,648 / test 22,427): own -0.00091 at t +2.92 against tour; form_scale refits from 0.50 to 0.70 under it. ADOPTED. prior_weight re-swept under the own prior (100 -0.00002 t +0.39; 150 shipped; 300 +0.00053 t -4.71; 600 +0.00118 t -5.58): 150 stays. The first prior_weight sweep returned four identical walks because backtest.py read the constant separately from weights.py; fixed the same day (rule 31).",
   "prior_age_note": "How much of a player's own deviation from the tour average survives into the prior the 270-day rating is shrunk toward, at the young and old ends of a career (weights.PRIOR_AGE, PRIOR_MODE 'age'; TENNIS_PRIOR_AGE). The ramp between them is ratings.age_multiplier with AGE_KNOTS (22, 28, 34), pinned to 1.0 at the prime, so (2, 0) reads: double the deviation at 22 and under, the player's own level at 28, the tour average at 34 and over. (1, 1) is exactly prior_mode 'own' and was the sweep's self-checking baseline (rule 31). Why: the own prior of 2026-09-14 made the age curve LARGER (youngest minus oldest +0.075 -> +0.085), because the 12-year window holds a declining player's peak and a rising player's junior years, and the prior bites hardest exactly where the 270-day window is thin (263 of the 292 rated players past 34 are under 1,500 points, and 421 of the 436 under 22). Swept by tools/knobsweep.py run prior_age, 14 values, one walk each, paired on 43,075 identical matches (test 22,427) against (1,1): 0,0 +0.00083 (t -3.42); 0.5,0.5 +0.00033 (-2.90); 0.5,0 -0.00007 (+0.36); 1,0.5 -0.00032 (+3.06); 1,0 -0.00075 (+4.31); 1,-1 -0.00094 (+2.62); 1,-0.5 -0.00095 (+3.63); 1.5,0 -0.00121 (+5.76); 2,-0.5 -0.00174 (+5.20); 2,0 -0.00175 (+6.94) <- ADOPTED; 2.5,0 -0.00191 (+5.97); 3,0 -0.00189 (+4.73); 4,0 -0.00198 (+3.84). Damping the OLD end helps and damping the young end hurts; the young end wants amplification. The loss flattens from 2 upward while the t falls away and form_scale starts climbing (0.85 at 4,0), so the plateau begins at 2 and the smallest change with the highest t ships, as carry_cap did. Every value that wins on test also wins on the train half in the same order (tools/knobsweep.py compare now reports both halves for every knob), so the choice is not read off the test half (rule 32); the order agrees except for swaps inside the plateau (train 3,0 > 2.5,0 > 4,0 against test 4,0 > 2.5,0 > 3,0), which is why the plateau ships its smallest value rather than its best point. MEASURED BOTH WAYS (scratchpad curvepair.py, the two residual caches, 22,759 identical matches): the age-dependent prior is -0.00181 at t +7.17 on the RATINGS, and +0.00016 at t -0.80 once the eight curves are applied -- the curves were already correcting most of what it fixes, so the moneyline price barely moves (rule 33). It ships anyway, for what the curves do not cover: the market gap, measured before the curve layer, improved on both seasons (2025 +0.02027 -> +0.01857, 2024 +0.02230 -> +0.02012) and the 10%+ disagreement bucket shrank in both (555 -> 495, 540 -> 497); the totals path takes the serve probabilities directly and never sees the curves; the correction layer shrank from -0.00738 to -0.00541, so less of the answer is a fitted residual shape; and the age curve itself, which is what prompted this, fell from a +0.085 youngest-minus-oldest spread costing +0.00227 to drop, to +0.056 costing +0.00091.",
+  "bo5_scale_note": "Measured 2026-09-16, NOT shipped. The confidence re-derivation found best-of-five matches carrying -0.0212 surprise against +0.0112 for best-of-three -- the model is systematically UNDER-confident over five sets, and it survives conditioning on how well measured the players are. Tested directly on the shipped walk cached predictions: form_scale fitted per format on the train half gives 0.70 for best-of-three and 0.50 for best-of-five, worth -0.00028 overall at t +2.14 on 21,584 held-out matches and -0.00144 at t +2.14 on the 4,209 best-of-five among them (best-of-three is unchanged). Real and ready; not shipped because form_scale is a scalar read by price.scaled_form_sd and backtest.price_player, so a format-dependent one touches the live pricing path and wants its own pass, including the both-ways check of rule 33.",
   "form_sd": 0.04,
   "form_scale": 0.7,
   "style_w": 0.0,
@@ -21,8 +22,8 @@
   "dens_w": 0.4,
   "elo_k": 4,
   "calibration_b": 1.0,
-  "calibration_b_measured": 1.0088961522832456,
-  "calibration_b_tour": 1.011577479703794,
+  "calibration_b_measured": 1.00868338264176,
+  "calibration_b_tour": 1.0121180501345823,
   "half_life_days": 270,
   "prior_weight": 150.0,
   "age_m_young": 0.5,
@@ -39,50 +40,49 @@
   "prior_mode": "age",
   "prior_age": "2,0",
   "train_years": 5,
-  "test_log_loss": 0.6088451756584276,
-  "test_matches": 22427,
-  "elo_log_loss": 0.6628020164366802,
-  "test_log_loss_uncalibrated": 0.6088451756584276,
-  "test_log_loss_calibrated": 0.6089131872278498,
+  "test_log_loss": 0.6085188090459583,
+  "test_matches": 22317,
+  "elo_log_loss": 0.6625350095885433,
+  "test_log_loss_uncalibrated": 0.6085188090459583,
+  "test_log_loss_calibrated": 0.6085811248881249,
   "test_ladder": [
     {
       "rung": "+ calibration",
-      "log_loss": 0.6142511948969664,
-      "vs_previous": 7.489022437751087e-05,
-      "paired_t": -2.7028587563035757
+      "log_loss": 0.613745369530067,
+      "vs_previous": 7.133839499686295e-05,
+      "paired_t": -2.4608292401733607
     },
     {
       "rung": "per-player surface + form (scale 0.70)",
-      "log_loss": 0.6106615815406589
+      "log_loss": 0.6102234122873463
     },
     {
       "rung": "+ in-event update",
-      "log_loss": 0.6089304236133468,
-      "vs_previous": -0.0017311579273119628,
-      "paired_t": 5.671581599354231
+      "log_loss": 0.6086046504175673,
+      "vs_previous": -0.0016187618697790461,
+      "paired_t": 5.293352719063646
     },
     {
       "rung": "+ air density (w=0.40)",
-      "log_loss": 0.6088451756584276,
-      "vs_previous": -8.524795491931276e-05,
-      "paired_t": 4.043149178161385
+      "log_loss": 0.6085188090459583,
+      "vs_previous": -8.584137160895026e-05,
+      "paired_t": 4.109892286887219
     },
     {
       "rung": "+ calibration",
-      "log_loss": 0.6089131872278498,
-      "vs_previous": 6.801156942223913e-05,
-      "paired_t": -3.0910153396320865
+      "log_loss": 0.6085811248881249,
+      "vs_previous": 6.231584216653799e-05,
+      "paired_t": -2.8999873663082534
     },
     {
       "rung": "three-stage serve ON (not shipped)",
-      "log_loss": 0.6149943980254242,
-      "vs_shipped": 0.0061492223669966425,
-      "paired_t": -8.85172183790714
+      "log_loss": 0.6147887954219302,
+      "vs_shipped": 0.0062699863759718335,
+      "paired_t": -8.990898567836027
     }
   ],
-  "scorable_matches": 43075,
+  "scorable_matches": 43120,
   "news_w": 1.0,
-  "fitted_on": "2005-2026 walk-forward, train half (20648 matches)",
-  "note": "Calibration DISABLED (b=1.0). Measured slope 1.009, but applying it made test log loss WORSE (0.60885 -> 0.60891): fitting per-player form_sd absorbs the overconfidence it was built to fix. dens_w is fitted but worth ~0.00006 on moneyline -- air density is symmetric, so its value should show up on games totals, not match winner. Refit with backtest.py after any model change.",
-  "bo5_scale_note": "Measured 2026-09-16, NOT shipped. The confidence re-derivation found best-of-five matches carrying -0.0212 surprise against +0.0112 for best-of-three -- the model is systematically UNDER-confident over five sets, and it survives conditioning on how well measured the players are. Tested directly on the shipped walk cached predictions: form_scale fitted per format on the train half gives 0.70 for best-of-three and 0.50 for best-of-five, worth -0.00028 overall at t +2.14 on 21,584 held-out matches and -0.00144 at t +2.14 on the 4,209 best-of-five among them (best-of-three is unchanged). Real and ready; not shipped because form_scale is a scalar read by price.scaled_form_sd and backtest.price_player, so a format-dependent one touches the live pricing path and wants its own pass, including the both-ways check of rule 33."
+  "fitted_on": "2005-2026 walk-forward, train half (20803 matches)",
+  "note": "Calibration DISABLED (b=1.0). Measured slope 1.009, but applying it made test log loss WORSE (0.60852 -> 0.60858): fitting per-player form_sd absorbs the overconfidence it was built to fix. dens_w is fitted but worth ~0.00006 on moneyline -- air density is symmetric, so its value should show up on games totals, not match winner. Refit with backtest.py after any model change."
 }

@@ -1,0 +1,6 @@
+30 venues cached, 80 to fetch
+  [1/80] cincinnati masters       FAILED: Hourly API request limit exceeded. Please try again in the next hour.
+  [2/80] winston salem            FAILED: Hourly API request limit exceeded. Please try again in the next hour.
+  [3/80] buenos aires             FAILED: Hourly API request limit exceeded. Please try again in the next hour.
+  [4/80] halle                    FAILED: Hourly API request limit exceeded. Please try again in the next hour.
+  [5/80] munich                   FAILED: Hourly API request limit exceeded. Please try again in the next hour.

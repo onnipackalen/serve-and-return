@@ -1,0 +1,107 @@
+4 venues cached, 106 to fetch
+  [1/106] indian wells masters     0 days
+  [2/106] miami masters            0 days
+  [3/106] monte carlo masters      0 days
+  [4/106] madrid masters           0 days
+  [5/106] rome masters             0 days
+  [6/106] canada masters           0 days
+  [7/106] cincinnati masters       0 days
+  [8/106] shanghai masters         0 days
+  [9/106] paris masters            0 days
+  [10/106] barcelona                0 days
+  [11/106] washington               0 days
+  [12/106] winston salem            0 days
+  [13/106] hamburg                  0 days
+  [14/106] queen's club             0 days
+  [15/106] dubai                    6,025 days
+  [16/106] acapulco                 6,025 days
+  [17/106] doha                     6,025 days
+  [18/106] delray beach             6,025 days
+  [19/106] buenos aires             0 days
+  [20/106] halle                    0 days
+  [21/106] munich                   0 days
+  [22/106] gstaad                   0 days
+  [23/106] stuttgart                0 days
+  [24/106] kitzbuhel                0 days
+  [25/106] houston                  0 days
+  [26/106] umag                     0 days
+  [27/106] auckland                 0 days
+  [28/106] bastad                   0 days
+  [29/106] newport                  0 days
+  [30/106] beijing                  0 days
+  [31/106] s hertogenbosch          0 days
+  [32/106] estoril                  0 days
+  [33/106] eastbourne               0 days
+  [34/106] mallorca                 0 days
+  [35/106] atlanta                  0 days
+  [36/106] los cabos                0 days
+  [37/106] adelaide                 0 days
+  [38/106] brisbane                 0 days
+  [39/106] sydney                   0 days
+  [40/106] marrakech                0 days
+  [41/106] belgrade                 0 days
+  [42/106] geneva                   0 days
+  [43/106] rio de janeiro           0 days
+  [44/106] sao paulo                6,025 days
+  [45/106] santiago                 6,025 days
+  [46/106] cordoba                  6,025 days
+  [47/106] quito                    6,025 days
+  [48/106] bogota                   0 days
+  [49/106] kuala lumpur             0 days
+  [50/106] chengdu                  0 days
+  [51/106] zhuhai                   0 days
+  [52/106] hangzhou                 0 days
+  [53/106] seoul                    0 days
+  [54/106] tel aviv                 0 days
+  [55/106] naples                   0 days
+  [56/106] gijon                    0 days
+  [57/106] bucharest                0 days
+  [58/106] budapest                 0 days
+  [59/106] istanbul                 0 days
+  [60/106] nottingham               0 days
+  [61/106] antalya                  0 days
+  [62/106] cagliari                 0 days
+  [63/106] almaty                   0 days
+  [64/106] banja luka               0 days
+  [65/106] mahrain                  0 days
+  [66/106] chennai                  0 days
+  [67/106] nice                     0 days
+  [68/106] casablanca               0 days
+  [69/106] shenzhen                 0 days
+  [70/106] pune                     0 days
+  [71/106] dusseldorf               0 days
+  [72/106] los angeles              0 days
+  [73/106] hong kong                0 days
+  [74/106] atp cup                  6,025 days
+  [75/106] united cup               6,025 days
+  [76/106] rotterdam                6,025 days
+  [77/106] vienna                   6,025 days
+  [78/106] basel                    0 days
+  [79/106] marseille                0 days
+  [80/106] montpellier              0 days
+  [81/106] stockholm                0 days
+  [82/106] metz                     0 days
+  [83/106] tokyo                    0 days
+  [84/106] moscow                   0 days
+  [85/106] st petersburg            0 days
+  [86/106] sofia                    0 days
+  [87/106] zagreb                   0 days
+  [88/106] astana                   0 days
+  [89/106] nur sultan               0 days
+  [90/106] dallas                   0 days
+  [91/106] lyon                     0 days
+  [92/106] antwerp                  0 days
+  [93/106] cologne                  0 days
+  [94/106] singapore                0 days
+  [95/106] milan                    0 days
+  [96/106] turin                    0 days
+  [97/106] london                   0 days
+  [98/106] nitto atp finals         0 days
+  [99/106] masters cup              0 days
+  [100/106] tour finals              0 days
+  [101/106] memphis                  0 days
+  [102/106] valencia                 0 days
+  [103/106] san jose                 0 days
+  [104/106] bangkok                  0 days
+  [105/106] new york                 6,025 days
+  [106/106] nextgen finals           6,025 days

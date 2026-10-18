@@ -1,0 +1,94 @@
+30 venues cached, 80 to fetch
+  [1/80] cincinnati masters       6,025 days
+  [2/80] winston salem            6,025 days
+  [3/80] buenos aires             6,025 days
+  [4/80] halle                    6,025 days
+  [5/80] munich                   6,025 days
+  [6/80] gstaad                   rate limited, waiting 10 min (attempt 1/12)
+  [6/80] gstaad                   6,025 days
+  [7/80] stuttgart                6,025 days
+  [8/80] kitzbuhel                6,025 days
+  [9/80] houston                  6,025 days
+  [10/80] umag                     6,025 days
+  [11/80] auckland                 6,025 days
+  [12/80] bastad                   6,025 days
+  [13/80] newport                  6,025 days
+  [14/80] beijing                  6,025 days
+  [15/80] s hertogenbosch          rate limited, waiting 10 min (attempt 1/12)
+  [15/80] s hertogenbosch          6,025 days
+  [16/80] estoril                  6,025 days
+  [17/80] eastbourne               6,025 days
+  [18/80] mallorca                 6,025 days
+  [19/80] atlanta                  6,025 days
+  [20/80] los cabos                rate limited, waiting 10 min (attempt 1/12)
+  [20/80] los cabos                6,025 days
+  [21/80] adelaide                 6,025 days
+  [22/80] brisbane                 6,025 days
+  [23/80] sydney                   6,025 days
+  [24/80] marrakech                6,025 days
+  [25/80] belgrade                 6,025 days
+  [26/80] geneva                   6,025 days
+  [27/80] rio de janeiro           6,025 days
+  [28/80] bogota                   6,025 days
+  [29/80] kuala lumpur             rate limited, waiting 10 min (attempt 1/12)
+  [29/80] kuala lumpur             6,025 days
+  [30/80] chengdu                  6,025 days
+  [31/80] zhuhai                   6,025 days
+  [32/80] hangzhou                 6,025 days
+  [33/80] seoul                    6,025 days
+  [34/80] tel aviv                 rate limited, waiting 10 min (attempt 1/12)
+  [34/80] tel aviv                 6,025 days
+  [35/80] naples                   6,025 days
+  [36/80] gijon                    6,025 days
+  [37/80] bucharest                6,025 days
+  [38/80] budapest                 6,025 days
+  [39/80] istanbul                 6,025 days
+  [40/80] nottingham               rate limited, waiting 10 min (attempt 1/12)
+  [40/80] nottingham               6,025 days
+  [41/80] antalya                  6,025 days
+  [42/80] cagliari                 6,025 days
+  [43/80] almaty                   6,025 days
+  [44/80] banja luka               6,025 days
+  [45/80] mahrain                  rate limited, waiting 10 min (attempt 1/12)
+  [45/80] mahrain                  6,025 days
+  [46/80] chennai                  6,025 days
+  [47/80] nice                     6,025 days
+  [48/80] casablanca               6,025 days
+  [49/80] shenzhen                 6,025 days
+  [50/80] pune                     rate limited, waiting 10 min (attempt 1/12)
+  [50/80] pune                     6,025 days
+  [51/80] dusseldorf               6,025 days
+  [52/80] los angeles              6,025 days
+  [53/80] hong kong                6,025 days
+  [54/80] basel                    6,025 days
+  [55/80] marseille                6,025 days
+  [56/80] montpellier              6,025 days
+  [57/80] stockholm                6,025 days
+  [58/80] metz                     rate limited, waiting 10 min (attempt 1/12)
+  [58/80] metz                     6,025 days
+  [59/80] tokyo                    6,025 days
+  [60/80] moscow                   6,025 days
+  [61/80] st petersburg            6,025 days
+  [62/80] sofia                    6,025 days
+  [63/80] zagreb                   6,025 days
+  [64/80] astana                   6,025 days
+  [65/80] nur sultan               6,025 days
+  [66/80] dallas                   rate limited, waiting 10 min (attempt 1/12)
+  [66/80] dallas                   6,025 days
+  [67/80] lyon                     6,025 days
+  [68/80] antwerp                  6,025 days
+  [69/80] cologne                  6,025 days
+  [70/80] singapore                6,025 days
+  [71/80] milan                    6,025 days
+  [72/80] turin                    6,025 days
+  [73/80] london                   6,025 days
+  [74/80] nitto atp finals         rate limited, waiting 10 min (attempt 1/12)
+  [74/80] nitto atp finals         6,025 days
+  [75/80] masters cup              6,025 days
+  [76/80] tour finals              6,025 days
+  [77/80] memphis                  rate limited, waiting 10 min (attempt 1/12)
+  [77/80] memphis                  6,025 days
+  [78/80] valencia                 6,025 days
+  [79/80] san jose                 6,025 days
+  [80/80] bangkok                  rate limited, waiting 10 min (attempt 1/12)
+  [80/80] bangkok                  6,025 days

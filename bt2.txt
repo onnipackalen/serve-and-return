@@ -1,0 +1,44 @@
+57,795 rated matches 2005-2026
+  tour-wide walk-forward       9s  35,576 matches
+  per-player walk-forward    163s  35,576 matches
+
+train 18,520 | test 17,056  (nothing below tuned on test)
+
+fit on TRAIN: tour-wide form_sd
+   sd 0.020   0.59876
+   sd 0.030   0.59725
+   sd 0.035   0.59686
+   sd 0.040   0.59679
+   sd 0.050   0.59759
+   -> 0.040
+
+fit on TRAIN: scale on each player's own derived form_sd
+   scale 0.50   0.59584
+   scale 0.70   0.59379
+   scale 0.85   0.59306
+   scale 1.00   0.59309
+   scale 1.20   0.59417
+   scale 1.50   0.59741
+   -> 0.85
+
+calibration slope on TRAIN   tour 1.002   per-player 0.960
+   (<1 = was overconfident, shrink toward 0.5)
+
+==================================================================
+TEST  (17,056 matches)
+model                                     log loss    brier     acc
+coin flip                                  0.69315  0.25000  0.0000
+tour-wide form_sd=0.040                    0.63108  0.22103  0.6351
+  + calibration                            0.63110  0.22104  0.6351
+per-player weights (scale 0.85)            0.62840  0.21964  0.6402
+  + calibration                            0.62778  0.21944  0.6402
+
+calibration on TEST, final model
+  0.50-0.58  predicted 0.5413  realised 0.5348  gap +0.0065  (5,570)
+  0.58-0.67  predicted 0.6233  realised 0.6082  gap +0.0151  (4,763)
+  0.67-0.75  predicted 0.7049  realised 0.6921  gap +0.0128  (3,361)
+  0.75-0.83  predicted 0.7875  realised 0.7679  gap +0.0197  (1,986)
+  0.83-0.92  predicted 0.8698  realised 0.8344  gap +0.0355  (954)
+  0.92-1.00  predicted 0.9468  realised 0.9384  gap +0.0084  (422)
+
+wrote fitted_params.json  (test log loss 0.62778)

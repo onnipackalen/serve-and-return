@@ -1,0 +1,79 @@
+57,795 matches 2005-2026
+
+STAGE 1 -- wide grid, tour-wide mode
+   ran half_life   270 prior_w   75    29,037 scorable   13s
+   ran half_life   270 prior_w  150    29,037 scorable   9s
+   ran half_life   270 prior_w  300    29,037 scorable   7s
+   ran half_life   270 prior_w  600    29,037 scorable   5s
+   ran half_life   365 prior_w   75    31,976 scorable   16s
+   ran half_life   365 prior_w  150    31,976 scorable   10s
+   ran half_life   365 prior_w  300    31,976 scorable   7s
+   ran half_life   365 prior_w  600    31,976 scorable   5s
+   ran half_life   548 prior_w   75    34,540 scorable   19s
+   ran half_life   548 prior_w  150    34,540 scorable   12s
+   ran half_life   548 prior_w  300    34,540 scorable   8s
+   ran half_life   548 prior_w  600    34,540 scorable   6s
+   ran half_life   730 prior_w   75    35,576 scorable   22s
+   ran half_life   730 prior_w  150    35,576 scorable   14s
+   ran half_life   730 prior_w  300    35,576 scorable   9s
+   ran half_life   730 prior_w  600    35,576 scorable   6s
+   ran half_life  1095 prior_w   75    36,431 scorable   25s
+   ran half_life  1095 prior_w  150    36,431 scorable   16s
+   ran half_life  1095 prior_w  300    36,431 scorable   11s
+   ran half_life  1095 prior_w  600    36,431 scorable   7s
+   ran half_life  1460 prior_w   75    36,916 scorable   28s
+   ran half_life  1460 prior_w  150    36,916 scorable   17s
+   ran half_life  1460 prior_w  300    36,916 scorable   12s
+   ran half_life  1460 prior_w  600    36,916 scorable   8s
+
+  common scorable set: 29,037 matches (vs 36,916 for the loosest config)
+  every config below is scored on those same matches.
+
+ half_life  prior_w    train ll
+       270       75     0.59205
+       270      150     0.59204
+       270      300     0.59195
+       270      600     0.59189
+       365       75     0.59301
+       365      150     0.59303
+       365      300     0.59300
+       365      600     0.59301
+       548       75     0.59511
+       548      150     0.59513
+       548      300     0.59522
+       548      600     0.59507
+       730       75     0.59685
+       730      150     0.59686
+       730      300     0.59693
+       730      600     0.59688
+      1095       75     0.59924
+      1095      150     0.59925
+      1095      300     0.59928
+      1095      600     0.59944
+      1460       75     0.60073
+      1460      150     0.60073
+      1460      300     0.60075
+      1460      600     0.60086
+
+  best: half_life=270, prior_weight=600
+
+STAGE 1b -- training window, at the best half_life/prior_weight
+   train_years   5   train ll 0.59168  (28,959 common matches)
+   train_years   8   train ll 0.59169  (28,959 common matches)
+   train_years  12   train ll 0.59169  (28,959 common matches)
+   -> 5
+
+STAGE 2 -- confirm top 3 in per-player mode (train_years=5)
+   ran half_life   270 prior_w  600   76s
+   ran half_life   270 prior_w  300   77s
+   ran half_life   270 prior_w  150   79s
+   common set 28,959 matches
+   half_life   270  prior_w  600   train ll 0.59017   scale 0.85
+   half_life   270  prior_w  300   train ll 0.59001   scale 1.00
+   half_life   270  prior_w  150   train ll 0.58990   scale 1.00
+
+============================================================
+WINNER  half_life=270  prior_weight=150  train_years=5  form_scale=1.00
+TEST (13,875 matches)  log loss 0.62140   brier 0.21677   acc 0.6445
+
+wrote fitted_params.json

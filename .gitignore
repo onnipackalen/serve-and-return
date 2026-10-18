@@ -29,9 +29,6 @@ data/news_applied.jsonl
 tools/residuals.json
 tools/odds/disagree_cache.json
 
-# --- the author's own working notebook, held back from the first commit ---
-data_plan.md
-
 # --- generated caches and sweep output ---
 cache/
 tools/_agehl/
@@ -45,20 +42,3 @@ __pycache__/
 .venv/
 venv/
 
-# --- loose run logs from old sessions; docs/measurements.md is the record ---
-/backtest_out.txt
-/bt2.txt
-/bt3.txt
-/cmp.txt
-/cmp2.txt
-/cmp3.txt
-/final.txt
-/final2.txt
-/tune2.txt
-/tune3.txt
-/tune_out.txt
-/wx.txt
-/wx2.txt
-/wx3.txt
-/wx4.txt
-/archive/probability_calculating_empty.txt

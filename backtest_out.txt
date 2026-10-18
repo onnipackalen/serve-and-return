@@ -1,0 +1,39 @@
+57,795 rated matches 2005-2026
+walk-forward: 35,576 scorable matches, 18s
+train 18,520 matches | test 17,056 matches (split at day 6280)
+
+fitting form_sd on TRAIN (ability uncertainty the point model omits)
+   form_sd 0.000   train log loss 0.60125  <-- best
+   form_sd 0.010   train log loss 0.60048  <-- best
+   form_sd 0.015   train log loss 0.59967  <-- best
+   form_sd 0.020   train log loss 0.59876  <-- best
+   form_sd 0.025   train log loss 0.59791  <-- best
+   form_sd 0.030   train log loss 0.59725  <-- best
+   form_sd 0.035   train log loss 0.59686  <-- best
+   form_sd 0.045   train log loss 0.59704
+   form_sd 0.060   train log loss 0.59949
+
+fitting Elo K on TRAIN
+   K 4     train log loss 0.61809  <-- best
+   K 8     train log loss 0.65156
+   K 12    train log loss 0.71042
+   K 16    train log loss 0.78312
+   K 24    train log loss 0.95478
+   K 32    train log loss 1.14920
+
+==============================================================
+TEST SET  (17,056 matches, nothing tuned on these)
+model                             log loss    brier     acc
+coin flip                          0.69315  0.25000  0.0000
+Elo, K=4 (results only)            0.65964  0.23214  0.6147
+point model, no form_sd            0.63727  0.22290  0.6351
+point model, NO opp adjustment     0.63402  0.22239  0.6307
+point model, form_sd=0.035         0.63161  0.22121  0.6351
+
+calibration on TEST, with form_sd
+  0.50-0.58   predicted 0.5409   realised 0.5350   gap +0.0059   (5,630)
+  0.58-0.67   predicted 0.6226   realised 0.6006   gap +0.0219   (4,715)
+  0.67-0.75   predicted 0.7058   realised 0.6819   gap +0.0239   (3,317)
+  0.75-0.83   predicted 0.7886   realised 0.7592   gap +0.0295   (2,018)
+  0.83-0.92   predicted 0.8702   realised 0.8384   gap +0.0318   (953)
+  0.92-1.00   predicted 0.9475   realised 0.9338   gap +0.0137   (423)

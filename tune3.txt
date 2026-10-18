@@ -1,0 +1,29 @@
+57,795 matches
+
+  ran hl=730   pw=300  yrs=8    35,576 scorable   177s
+  ran hl=270   pw=150  yrs=5    28,959 scorable   80s
+  ran hl=180   pw=150  yrs=5    22,486 scorable   65s
+  ran hl=180   pw=75   yrs=5    22,486 scorable   68s
+  ran hl=120   pw=150  yrs=5    12,404 scorable   56s
+  ran hl=120   pw=75   yrs=4    12,403 scorable   46s
+  ran hl=220   pw=150  yrs=4    25,940 scorable   59s
+  ran hl=270   pw=150  yrs=3    28,487 scorable   55s
+
+common set 12,403  (train 6,549 / test 5,854)
+every config scored on exactly these matches
+
+ half_life  prior_w  years  scale    train ll     TEST ll    brier     acc
+       730      300      8   0.75     0.57993     0.61894  0.21595  0.6421  <- previous
+       270      150      5   0.85     0.57654     0.61823  0.21579  0.6464
+       180      150      5   0.75     0.57780     0.61924  0.21609  0.6481
+       180       75      5   0.85     0.57777     0.61938  0.21612  0.6481
+       120      150      5   0.60     0.57950     0.61972  0.21632  0.6445
+       120       75      4   0.85     0.57948     0.61982  0.21633  0.6461
+       220      150      4   0.75     0.57777     0.61923  0.21618  0.6464
+       270      150      3   0.85     0.57739     0.62011  0.21650  0.6452
+
+==================================================================
+BEST ON TRAIN   half_life=270  prior_weight=150  train_years=5  form_scale=0.85
+  test log loss 0.61823   vs previous config 0.61894   (+0.00071)
+
+wrote fitted_params.json

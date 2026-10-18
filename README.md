@@ -16,7 +16,7 @@ $ python3 tennis.py
 
 Jannik Sinner  vs  Carlos Alcaraz
 ----------------------------------------------------------------
-  as of 2026-09-15   Clay   best of 5
+  as of 2026-10-17   Clay   best of 5
   Jannik Sinner     serve 0.7199  return 0.4756  form_sd 0.0192
   Carlos Alcaraz    serve 0.6905  return 0.4848  form_sd 0.0320
 
@@ -27,13 +27,13 @@ Jannik Sinner  vs  Carlos Alcaraz
 ## Does it work?
 
 Walk-forward, refitting on prior matches only and never training on the week it
-prices:
+prices. Scored on 43,120 matches, data through 2026-10-07:
 
 | | log loss |
 |---|---|
 | coin flip | 0.69315 |
-| tuned Elo | 0.66280 |
-| **this model** | **0.60885** |
+| tuned Elo | 0.66254 |
+| **this model** | **0.60852** |
 
 Against the market, on matches joined to Pinnacle's closing line, it loses. The
 gap is **ordering, not calibration** — an optimal rescaling of the model's
@@ -130,7 +130,8 @@ log-odds.
   rejected idea, and why.
 - **[docs/handoff.md](docs/handoff.md)** — working notes: current state, the
   rules that keep the measurements honest, and the traps already fallen into.
-  Written to a future self, and it reads like it.
+- **[docs/notebook.md](docs/notebook.md)** — the full lab notebook, in order,
+  including the dead ends. Both are written to a future self and read like it.
 
 ## Licence
 
